@@ -6,7 +6,9 @@
 	notifempty
 	sharedscripts
 	delaycompress
-	su
+	<% if node['lsb']['codename'] == "raring" %>
+	su root root
+	<% end %>
 	postrotate
 		/bin/kill -SIGUSR1 `cat <%= node['php']['fpm_pidfile'] %> 2>/dev/null` 2>/dev/null || true
 	endscript
